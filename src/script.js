@@ -2,6 +2,8 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min'
+import vertexShader from './vertex.glsl'
+import fragmentShader from './fragment.glsl'
 
 // const gui = new GUI();
 const sizes = {
@@ -9,15 +11,20 @@ const sizes = {
     height: window.innerHeight
 }
 const scene = new THREE.Scene()
+
+//---Plane---------------
 const plane = new THREE.PlaneGeometry(3,3,10,1)
-const material = new THREE.MeshBasicMaterial({
-    color: 0xf348ff,
-    side: THREE.DoubleSide
+const material = new THREE.ShaderMaterial({
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader
 })
 const mesh = new THREE.Mesh(plane, material)
 scene.add(mesh)
+
+//-------------
+
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height)
-camera.position.set(0,2,4)
+camera.position.set(0,0,6)
 const canvas = document.querySelector('#webgl')
 
 const renderer = new THREE.WebGLRenderer({
