@@ -13,11 +13,14 @@ const sizes = {
 const scene = new THREE.Scene()
 
 //---Plane---------------
-const plane = new THREE.PlaneGeometry(3,3,10,1)
+const plane = new THREE.IcosahedronGeometry(1, 100)
 const material = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader
 })
+material.uniforms.uTime = {
+    value: 0
+}
 const mesh = new THREE.Mesh(plane, material)
 scene.add(mesh)
 
@@ -33,7 +36,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor(0xf8a5c2)
+// renderer.setClearColor(0xf0a4c2)
 renderer.shadowMap.enabled = true
 
 let controls = new OrbitControls(camera, canvas)
@@ -68,7 +71,9 @@ window.addEventListener('dblclick', () => {
     }
 });
 
+let time = new THREE.Clock();
 function tick() {
+    material.uniforms.uTime.value += time.getDelta() / 10;
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
 }
