@@ -104,5 +104,6 @@ void main(){
     vUv = uv;
     vDisplacement = pattern;
 
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    vec3 newPos = position + normal * (vDisplacement/3.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0);
 }

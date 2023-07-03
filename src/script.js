@@ -44,7 +44,7 @@ controls.enableDamping = true
 controls.dampingFactor = 0.02
 
 scene.add(camera)
-const PointLight = new THREE.PointLight(0x7F6C6C, 4, 80);
+const PointLight = new THREE.PointLight(0x7F6C6C, 10, 80);
 PointLight.position.set(0, 7, 0);
 scene.add(PointLight);
 camera.lookAt(mesh)
