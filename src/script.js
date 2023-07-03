@@ -47,7 +47,6 @@ scene.add(camera)
 const PointLight = new THREE.PointLight(0x7F6C6C, 10, 80);
 PointLight.position.set(0, 7, 0);
 scene.add(PointLight);
-camera.lookAt(mesh)
 
 window.addEventListener('resize', () => {
     sizes.width = window.innerWidth
